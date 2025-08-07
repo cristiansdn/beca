@@ -1,13 +1,32 @@
 @import "tailwindcss";
 
 :root {
+  /* Colores personalizados */
+  --primary: #274F8F;        /* Azul principal para botones */
+  --primary-hover: #1e3a6f;  /* Azul más oscuro para hover */
+  --secondary: #F3F4F6;      /* Gris claro para botones secundarios */
+  --secondary-hover: #e5e7eb; /* Gris más oscuro para hover */
+  
+  /* Colores base */
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Colores de estado */
+  --danger: #ef4444;         /* Rojo para errores */
+  --success: #22c55e;        /* Verde para éxito */
 }
 
 @theme inline {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
