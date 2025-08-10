@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { Menu, User } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+
 
 interface AdminHeaderProps {
   onToggleSidebar?: () => void
@@ -12,6 +14,8 @@ interface AdminHeaderProps {
 export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: AdminHeaderProps) {
   const { user } = useAuth()
   const [showTooltip, setShowTooltip] = useState(false)
+  const router = useRouter()
+
 
   const handleLogout = async () => {
     try {
@@ -63,7 +67,10 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
                     </div>
                     <div className="border-t border-secondary pt-2">
                       <button
-                        onClick={handleLogout}
+                        onClick={() => {
+                          handleLogout()
+                          router.push('/front-end/login')
+                        }}
                         className="w-full text-left px-3 py-2 text-sm hover:bg-danger/10 hover:text-danger rounded transition-colors"
                       >
                         Cerrar sesión

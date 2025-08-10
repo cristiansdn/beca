@@ -22,8 +22,7 @@ export default function Home() {
     )
   }
 
-  if (!user) {
-    return (
+  return (
       <section className="min-h-screen bg-gradient-to-br from-background via-secondary/20 to-primary/5 relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
@@ -53,7 +52,7 @@ export default function Home() {
               
               <div className="flex flex-col sm:flex-row gap-6">
                 <Link 
-                  href="/login"
+                  href="/front-end/login"
                   className="group bg-gradient-to-r from-primary to-primary-hover text-white px-8 py-4 rounded-xl hover:shadow-2xl hover:shadow-primary/25 font-semibold inline-flex items-center justify-center transform hover:scale-105 transition-all duration-300"
                 >
                   <span className="mr-2 group-hover:animate-bounce">🚀</span>
@@ -143,46 +142,4 @@ export default function Home() {
         </div>
       </section>
     )
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-secondary/10 to-primary/5 flex items-center justify-center relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-20 left-20 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 right-20 w-40 h-40 bg-secondary/20 rounded-full blur-3xl"></div>
-      
-      <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-12 border border-primary/10 text-center max-w-md w-full mx-6 transform hover:scale-105 transition-all duration-300">
-        <div className="w-20 h-20 bg-gradient-to-r from-primary to-primary-hover rounded-full flex items-center justify-center mx-auto mb-6">
-          <span className="text-3xl text-white">🎓</span>
-        </div>
-        
-        <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-primary-hover bg-clip-text text-transparent">
-          ¡Bienvenido de vuelta!
-        </h1>
-        
-        <div className="bg-secondary/50 rounded-xl p-4 mb-6 space-y-2">
-          <p className="text-sm text-muted-foreground font-medium">Email:</p>
-          <p className="font-semibold text-foreground">{user.email}</p>
-          <p className="text-xs text-muted-foreground mt-2">ID: {user.id.slice(0, 8)}...</p>
-        </div>
-        
-        <div className="space-y-3">
-          <Link
-            href="/front-end/admin/bandeja"
-            className="block bg-primary text-white px-6 py-3 rounded-xl hover:bg-primary-hover font-semibold transform hover:scale-105 transition-all duration-300"
-          >
-            📊 Panel de Administración
-          </Link>
-          
-          <button 
-            onClick={handleLogout}
-            className="w-full bg-secondary text-foreground px-6 py-3 rounded-xl hover:bg-secondary-hover font-semibold transform hover:scale-105 transition-all duration-300"
-          >
-            <span className="mr-2">🚪</span>
-            Cerrar Sesión
-          </button>
-        </div>
-      </div>
-    </div>
-  )
 }

@@ -80,7 +80,7 @@ export default function SignUp() {
         
         <p className="text-center text-sm">
           ¿Ya tienes una cuenta?{' '}
-          <Link href="/login" className="text-primary hover:underline">
+          <Link href="/front-end/login" className="text-primary hover:underline">
             Iniciar sesión aquí
           </Link>
         </p>

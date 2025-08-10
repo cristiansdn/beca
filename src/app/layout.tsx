@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BecaYACHAY - Sistema de Información Beca 18",
+  title: "BecaYACHAY",
   description: "Accede a información completa sobre Beca 18: requisitos, cronogramas, IES elegibles y más.",
 };
 

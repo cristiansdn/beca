@@ -31,7 +31,7 @@ export default function Login() {
         setError(error.message)
       }
     } else {
-      router.push('/')
+      router.push('/front-end/admin/bandeja')
     }
     setLoading(false)
   }
@@ -72,10 +72,12 @@ export default function Login() {
           className="w-full p-3 bg-primary text-white rounded-lg hover:bg-primary-hover disabled:opacity-50"
         >
           {loading ? 'Iniciando sesión....' : 'Iniciar Sesión'}
+          
         </button>
         <p className="text-center text-sm">
           ¿No tienes una cuenta?{' '}
-          <Link href="/signup" className="text-primary hover:underline">
+          <Link href="/front-end/signup" className="text-primary hover:underline">
+
 
 
             Regístrate aquí
