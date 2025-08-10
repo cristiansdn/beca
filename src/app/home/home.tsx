@@ -7,7 +7,11 @@ export default function Home() {
   const { user, loading } = useAuth()
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
+    try {
+      await supabase.auth.signOut()
+    } catch (error) {
+      console.error('Error signing out:', error)
+    }
   }
 
   if (loading) {
@@ -164,10 +168,10 @@ export default function Home() {
         
         <div className="space-y-3">
           <Link
-            href="/crud"
+            href="/front-end/admin/bandeja"
             className="block bg-primary text-white px-6 py-3 rounded-xl hover:bg-primary-hover font-semibold transform hover:scale-105 transition-all duration-300"
           >
-            📊 Gestión de Empleados
+            📊 Panel de Administración
           </Link>
           
           <button 

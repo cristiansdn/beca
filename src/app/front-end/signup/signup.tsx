@@ -25,9 +25,15 @@ export default function SignUp() {
     })
 
     if (error) {
-      setError(error.message)
+      if (error.message.includes('User already registered')) {
+        setError('Este email ya está registrado. Intenta iniciar sesión.')
+      } else if (error.message.includes('Password should be at least')) {
+        setError('La contraseña debe tener al menos 6 caracteres.')
+      } else {
+        setError(error.message)
+      }
     } else {
-      setMessage('Check your email for verification link!')
+      setMessage('¡Revisa tu email para el enlace de verificación!')
     }
     setLoading(false)
   }
@@ -35,7 +41,7 @@ export default function SignUp() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <form onSubmit={handleSignUp} className="max-w-md w-full space-y-4 p-6">
-        <h1 className="text-2xl font-bold text-center">Sign Up</h1>
+        <h1 className="text-2xl font-bold text-center">Registrarse</h1>
         
         {error && (
           <div className="text-danger text-sm text-center">{error}</div>

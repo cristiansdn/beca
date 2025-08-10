@@ -23,7 +23,13 @@ export default function Login() {
     })
 
     if (error) {
-      setError(error.message)
+      if (error.message.includes('Invalid login credentials')) {
+        setError('Credenciales incorrectas. Verifica tu email y contraseña.')
+      } else if (error.message.includes('Email not confirmed')) {
+        setError('Por favor confirma tu email antes de iniciar sesión.')
+      } else {
+        setError(error.message)
+      }
     } else {
       router.push('/')
     }
