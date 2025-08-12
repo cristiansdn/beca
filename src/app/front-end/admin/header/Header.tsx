@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRole } from '@/hooks/useRole'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
@@ -16,10 +16,26 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
   const { user, userProfile } = useAuth()
   const { role, loading: roleLoading } = useRole()
   const [showTooltip, setShowTooltip] = useState(false)
+  const tooltipRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
 
-
   const { signOut } = useAuth()
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
+        setShowTooltip(false)
+      }
+    }
+
+    if (showTooltip) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showTooltip])
 
   const handleLogout = async () => {
     try {
@@ -52,25 +68,25 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
               Ver como usuario
             </button>
 
-            <div className="relative">
+            <div className="relative" ref={tooltipRef}>
               <button
                 onClick={() => setShowTooltip(!showTooltip)}
-                className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-white/90 transition-colors"
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-white/90 cursor-pointer transition-colors"
               >
                 <User className="w-5 h-5 text-primary" />
               </button>
 
               {showTooltip && (
-                <div className="absolute top-full right-0 mt-2 bg-white text-foreground rounded-lg shadow-lg border border-secondary p-4 min-w-[200px] z-50">
+                <div className="absolute top-full right-0 mt-2 bg-white text-foreground rounded-lg shadow-lg border border-secondary min-w-[200px] p-4 z-50">
                   <div className="space-y-2">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Nombre:</p>
-                      <p className="font-semibold">{userProfile?.nombres || 'Sin nombre'}</p>
+                      <p className="font-semibold">{userProfile?.nombres + ' ' + userProfile?.apellido_paterno + ' ' + userProfile?.apellido_materno}</p>
                     </div>
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Rol:</p>
                       <p className="font-semibold">
-                        {roleLoading ? 'Cargando...' : role === 'admin' ? 'Administrador' : 'Usuario'}
+                        {roleLoading ? 'Cargando...' : role || 'Usuario'}
                       </p>
                     </div>
 
@@ -81,7 +97,7 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
                     <div className="border-t border-secondary pt-2">
                       <button
                         onClick={handleLogout}
-                        className="w-full text-left px-3 py-2 text-sm hover:bg-danger/10 hover:text-danger rounded transition-colors"
+                        className="w-full text-left px-3 py-2 text-sm hover:bg-danger/10 hover:text-danger rounded transition-colors cursor-pointer"
                       >
                         Cerrar sesión
                       </button>

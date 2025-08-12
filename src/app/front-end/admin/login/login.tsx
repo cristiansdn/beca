@@ -83,17 +83,12 @@ export default function Login() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+          className="w-full p-3 bg-primary text-white rounded-lg hover:bg-primary/90 disabled:opacity-50 cursor-pointer"
+
         >
           {loading ? 'Iniciando sesión....' : 'Iniciar Sesión'}
 
         </button>
-        <p className="text-center text-sm">
-          ¿No tienes una cuenta?{' '}
-          <Link href="/front-end/signup" className="text-primary hover:underline">
-            Regístrate aquí
-          </Link>
-        </p>
       </form>
     </div>
   )
