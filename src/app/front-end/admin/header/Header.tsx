@@ -48,9 +48,11 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
 
 
   return (
-    <header className="bg-primary text-white shadow-lg sticky top-0 z-50">
-      <div className="px-3 sm:px-4 lg:px-6 py-3 lg:py-4">
-        <div className="flex items-center justify-between">
+    <header className="bg-primary text-white shadow-lg z-50 w-full">
+
+      <div className="px-3 sm:px-4 lg:px-6 py-3 lg:py-4 h-[73px] lg:h-[81px] flex items-center">
+
+        <div className="flex items-center justify-between w-full">
           <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={onToggleSidebar}
@@ -58,7 +60,7 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
             >
               <Menu className="w-5 h-5" />
             </button>
-            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-bold hidden sm:block">
               Beca 18 - Programa de Beca
             </h1>
           </div>
