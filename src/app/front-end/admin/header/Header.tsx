@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import { useRole } from '@/hooks/useRole'
 import { useAuth } from '@/context/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { Menu, User } from 'lucide-react'
@@ -12,18 +13,23 @@ interface AdminHeaderProps {
 }
 
 export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: AdminHeaderProps) {
-  const { user } = useAuth()
+  const { user, userProfile } = useAuth()
+  const { role, loading: roleLoading } = useRole()
   const [showTooltip, setShowTooltip] = useState(false)
   const router = useRouter()
 
 
+  const { signOut } = useAuth()
+
   const handleLogout = async () => {
     try {
-      await supabase.auth.signOut()
+      await signOut()
+      router.push('/front-end/admin/login')
     } catch (error) {
       console.error('Error signing out:', error)
     }
   }
+
 
   return (
     <header className="bg-primary text-white shadow-lg sticky top-0 z-50">
@@ -58,19 +64,23 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
                 <div className="absolute top-full right-0 mt-2 bg-white text-foreground rounded-lg shadow-lg border border-secondary p-4 min-w-[200px] z-50">
                   <div className="space-y-2">
                     <div>
-                      <p className="text-sm font-medium text-muted-foreground">Rol:</p>
-                      <p className="font-semibold">Administrador</p>
+                      <p className="text-sm font-medium text-muted-foreground">Nombre:</p>
+                      <p className="font-semibold">{userProfile?.nombres || 'Sin nombre'}</p>
                     </div>
+                    <div>
+                      <p className="text-sm font-medium text-muted-foreground">Rol:</p>
+                      <p className="font-semibold">
+                        {roleLoading ? 'Cargando...' : role === 'admin' ? 'Administrador' : 'Usuario'}
+                      </p>
+                    </div>
+
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Usuario:</p>
                       <p className="font-semibold">{user?.email}</p>
                     </div>
                     <div className="border-t border-secondary pt-2">
                       <button
-                        onClick={() => {
-                          handleLogout()
-                          router.push('/front-end/login')
-                        }}
+                        onClick={handleLogout}
                         className="w-full text-left px-3 py-2 text-sm hover:bg-danger/10 hover:text-danger rounded transition-colors"
                       >
                         Cerrar sesión

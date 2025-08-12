@@ -13,7 +13,7 @@ export default function Bandeja() {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push('/login')
+      router.push('/front-end/admin/login')
     }
   }, [user, loading, router])
 

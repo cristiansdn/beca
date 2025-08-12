@@ -4,7 +4,6 @@ import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -31,23 +30,38 @@ export default function Login() {
         setError(error.message)
       }
     } else {
-      router.push('/front-end/admin/bandeja')
+
+      const { data: { user: currentUser } } = await supabase.auth.getUser()
+
+      const { data: profile, error: profileError } = await supabase
+        .rpc('get_user_role')
+
+
+
+
+      console.log('Profile data:', profile) // Para debug
+      console.log('Profile error:', profileError) // Para debug
+
+
+      if (profile === 'admin') {
+        router.push('/front-end/admin/bandeja')
+      } else {
+        setError('No tienes permisos de administrador')
+        await supabase.auth.signOut()
+      }
+
     }
     setLoading(false)
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-
-
       <form onSubmit={handleLogin} className="max-w-md w-full space-y-4 p-6">
         <h1 className="text-2xl font-bold text-center">Login</h1>
-
         {error && (
           <div className="text-danger text-sm text-center">{error}</div>
 
         )}
-
         <input
           type="email"
           placeholder="Correo"
@@ -69,19 +83,15 @@ export default function Login() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full p-3 bg-primary text-white rounded-lg hover:bg-primary-hover disabled:opacity-50"
+          className="w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
         >
           {loading ? 'Iniciando sesión....' : 'Iniciar Sesión'}
-          
+
         </button>
         <p className="text-center text-sm">
           ¿No tienes una cuenta?{' '}
           <Link href="/front-end/signup" className="text-primary hover:underline">
-
-
-
             Regístrate aquí
-
           </Link>
         </p>
       </form>

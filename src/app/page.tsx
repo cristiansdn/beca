@@ -1,1 +1,1 @@
-export { default } from './front-end/home/home'
+export { default } from './front-end/admin/login/login'
