@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home , Settings } from 'lucide-react'
+import { Home, Settings, User } from 'lucide-react'
 
 export default function Toolbar() {
   const pathname = usePathname()
@@ -37,6 +37,16 @@ export default function Toolbar() {
           >
             <Settings className="w-5 h-5" />
             <span className="font-medium">Gestionar Convocatorias</span>
+          </Link>
+
+          <Link 
+            href="/front-end/admin/perfil"
+            className={`w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg transition-colors ${
+              pathname === '/front-end/admin/perfil' ? 'bg-primary text-white' : 'hover:bg-secondary/30'
+            }`}
+          >
+            <User className="w-5 h-5" />
+            <span className="font-medium">Perfil</span>
           </Link>
         </div>
       </nav>

@@ -40,9 +40,11 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
   const handleLogout = async () => {
     try {
       await signOut()
-      
     } catch (error) {
       console.error('Error signing out:', error)
+    } finally {
+      // Forzar redirección incluso si signOut falla
+      window.location.href = '/'
     }
   }
 
