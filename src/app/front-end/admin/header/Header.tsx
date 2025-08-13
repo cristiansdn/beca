@@ -40,7 +40,7 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
   const handleLogout = async () => {
     try {
       await signOut()
-      router.push('/front-end/admin/login')
+      
     } catch (error) {
       console.error('Error signing out:', error)
     }
@@ -56,7 +56,7 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
           <div className="flex items-center gap-2 sm:gap-4">
             <button
               onClick={onToggleSidebar}
-              className="p-2 hover:opacity-80 transition-opacity"
+              className="p-2 hover:opacity-80 transition-opacity cursor-pointer"
             >
               <Menu className="w-5 h-5" />
             </button>

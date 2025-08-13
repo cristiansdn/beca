@@ -1,6 +1,10 @@
 'use client'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Home , Settings } from 'lucide-react'
 
 export default function Toolbar() {
+  const pathname = usePathname()
   return (
     <div className="h-full flex flex-col">
       {/* Header del Sidenav */}
@@ -15,15 +19,25 @@ export default function Toolbar() {
       {/* Menú */}
       <nav className="flex-1 p-4">
         <div className="space-y-2">
-          <button className="w-full flex items-center gap-3 px-3 py-3 text-left hover:bg-secondary/30 rounded-lg transition-colors">
-            <span className="text-xl">🏠</span>
+          <Link 
+            href="/front-end/admin/dashboard"
+            className={`w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg transition-colors ${
+              pathname === '/front-end/admin/dashboard' ? 'bg-primary text-white' : 'hover:bg-secondary/30'
+            }`}
+          >
+            <Home className="w-5 h-5" />
             <span className="font-medium">Inicio</span>
-          </button>
+          </Link>
           
-          <button className="w-full flex items-center gap-3 px-3 py-3 text-left hover:bg-secondary/30 rounded-lg transition-colors">
-            <span className="text-xl">⚙️</span>
-            <span className="font-medium">Gestionar convocatoria</span>
-          </button>
+          <Link 
+            href="/front-end/admin/convocatorias"
+            className={`w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg transition-colors ${
+              pathname === '/front-end/admin/convocatorias' ? 'bg-primary text-white' : 'hover:bg-secondary/30'
+            }`}
+          >
+            <Settings className="w-5 h-5" />
+            <span className="font-medium">Gestionar Convocatorias</span>
+          </Link>
         </div>
       </nav>
     </div>
