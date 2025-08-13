@@ -30,9 +30,9 @@ export default function Toolbar() {
           </Link>
           
           <Link 
-            href="/front-end/admin/convocatorias"
+            href="/front-end/admin/gestion/convocatorias"
             className={`w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg transition-colors ${
-              pathname === '/front-end/admin/convocatorias' ? 'bg-primary text-white' : 'hover:bg-secondary/30'
+              pathname === '/front-end/admin/gestion/convocatorias' ? 'bg-primary text-white' : 'hover:bg-secondary/30'
             }`}
           >
             <Settings className="w-5 h-5" />

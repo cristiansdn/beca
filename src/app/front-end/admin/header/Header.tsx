@@ -79,7 +79,7 @@ export default function AdminHeader({ onToggleSidebar, sidebarOpen = true }: Adm
               </button>
 
               {showTooltip && (
-                <div className="absolute top-full right-0 mt-2 bg-white text-foreground rounded-lg shadow-lg border border-secondary min-w-[200px] p-4 z-50">
+                <div className="absolute top-full right-0 mt-2 bg-white text-foreground rounded-lg shadow-lg border border-secondary min-w-[250px] p-4 z-50">
                   <div className="space-y-2">
                     <div>
                       <p className="text-sm font-medium text-muted-foreground">Nombre:</p>
